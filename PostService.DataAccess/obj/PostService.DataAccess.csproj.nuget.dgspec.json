@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\Server\\PostService\\PostService.DataAccess\\PostService.DataAccess.csproj": {}
+    "D:\\Projects\\PostService\\PostService.DataAccess\\PostService.DataAccess.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\Server\\PostService\\PostService.Core\\PostService.Core.csproj": {
+    "D:\\Projects\\PostService\\PostService.Core\\PostService.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Server\\PostService\\PostService.Core\\PostService.Core.csproj",
+        "projectUniqueName": "D:\\Projects\\PostService\\PostService.Core\\PostService.Core.csproj",
         "projectName": "PostService.Core",
-        "projectPath": "D:\\Projects\\Server\\PostService\\PostService.Core\\PostService.Core.csproj",
+        "projectPath": "D:\\Projects\\PostService\\PostService.Core\\PostService.Core.csproj",
         "packagesPath": "C:\\Users\\raslf\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Server\\PostService\\PostService.Core\\obj\\",
+        "outputPath": "D:\\Projects\\PostService\\PostService.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -344,14 +344,14 @@
         }
       }
     },
-    "D:\\Projects\\Server\\PostService\\PostService.DataAccess\\PostService.DataAccess.csproj": {
+    "D:\\Projects\\PostService\\PostService.DataAccess\\PostService.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Server\\PostService\\PostService.DataAccess\\PostService.DataAccess.csproj",
+        "projectUniqueName": "D:\\Projects\\PostService\\PostService.DataAccess\\PostService.DataAccess.csproj",
         "projectName": "PostService.DataAccess",
-        "projectPath": "D:\\Projects\\Server\\PostService\\PostService.DataAccess\\PostService.DataAccess.csproj",
+        "projectPath": "D:\\Projects\\PostService\\PostService.DataAccess\\PostService.DataAccess.csproj",
         "packagesPath": "C:\\Users\\raslf\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Server\\PostService\\PostService.DataAccess\\obj\\",
+        "outputPath": "D:\\Projects\\PostService\\PostService.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -373,8 +373,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "D:\\Projects\\Server\\PostService\\PostService.Core\\PostService.Core.csproj": {
-                "projectPath": "D:\\Projects\\Server\\PostService\\PostService.Core\\PostService.Core.csproj"
+              "D:\\Projects\\PostService\\PostService.Core\\PostService.Core.csproj": {
+                "projectPath": "D:\\Projects\\PostService\\PostService.Core\\PostService.Core.csproj"
               }
             }
           }
@@ -396,6 +396,12 @@
           "targetAlias": "net10.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[10.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[10.0.3, )"
             },

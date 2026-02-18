@@ -6,7 +6,7 @@ namespace PostService.Core.Abstractions
     {
         Task<Guid> Create(Message msg);
         Task<Guid> Delete(Guid id);
-        Task<List<Message>> GetAll();
+        Task<List<(Message, string)>> GetAll();
         Task<Guid> Update(Guid id, string msg, int likesQuantity, int dislikesQuantity);
     }
 }

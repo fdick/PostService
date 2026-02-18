@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\Server\\PostService\\PostService.Core\\PostService.Core.csproj",
+      "projectUniqueName": "D:\\Projects\\PostService\\PostService.Core\\PostService.Core.csproj",
       "projectName": "PostService.Core",
-      "projectPath": "D:\\Projects\\Server\\PostService\\PostService.Core\\PostService.Core.csproj",
+      "projectPath": "D:\\Projects\\PostService\\PostService.Core\\PostService.Core.csproj",
       "packagesPath": "C:\\Users\\raslf\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\Server\\PostService\\PostService.Core\\obj\\",
+      "outputPath": "D:\\Projects\\PostService\\PostService.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

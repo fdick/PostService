@@ -1,0 +1,16 @@
+D:\Projects\PostService\PostService.Application\bin\Debug\net10.0\PostService.Application.deps.json
+D:\Projects\PostService\PostService.Application\bin\Debug\net10.0\PostService.Application.dll
+D:\Projects\PostService\PostService.Application\bin\Debug\net10.0\PostService.Application.pdb
+D:\Projects\PostService\PostService.Application\bin\Debug\net10.0\PostService.Core.dll
+D:\Projects\PostService\PostService.Application\bin\Debug\net10.0\PostService.Core.pdb
+D:\Projects\PostService\PostService.Application\obj\Debug\net10.0\PostService.Application.csproj.AssemblyReference.cache
+D:\Projects\PostService\PostService.Application\obj\Debug\net10.0\PostService.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\PostService\PostService.Application\obj\Debug\net10.0\PostService.Application.AssemblyInfoInputs.cache
+D:\Projects\PostService\PostService.Application\obj\Debug\net10.0\PostService.Application.AssemblyInfo.cs
+D:\Projects\PostService\PostService.Application\obj\Debug\net10.0\PostService.Application.csproj.CoreCompileInputs.cache
+D:\Projects\PostService\PostService.Application\obj\Debug\net10.0\PostService.Application.sourcelink.json
+D:\Projects\PostService\PostService.Application\obj\Debug\net10.0\PostServ.E1AAFB4F.Up2Date
+D:\Projects\PostService\PostService.Application\obj\Debug\net10.0\PostService.Application.dll
+D:\Projects\PostService\PostService.Application\obj\Debug\net10.0\refint\PostService.Application.dll
+D:\Projects\PostService\PostService.Application\obj\Debug\net10.0\PostService.Application.pdb
+D:\Projects\PostService\PostService.Application\obj\Debug\net10.0\ref\PostService.Application.dll

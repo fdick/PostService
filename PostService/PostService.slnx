@@ -1,5 +1,6 @@
 <Solution>
+  <Project Path="../PostService.Application/PostService.Application.csproj" Id="cf19d70a-7796-43d7-bd97-d052eda5e555" />
+  <Project Path="../PostService.Core/PostService.Core.csproj" />
+  <Project Path="../PostService.DataAccess/PostService.DataAccess.csproj" />
   <Project Path="PostService.API.csproj" />
-  <Project Path="PostService.Core/PostService.Core.csproj" />
-  <Project Path="PostService.DataAccess/PostService.DataAccess.csproj" />
 </Solution>

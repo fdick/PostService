@@ -14,7 +14,7 @@ namespace PostService.DataAccess.Repositories
             this._context = context;
         }
 
-        public async Task<List<Message>> GetAll()
+        public async Task<List<(Message, string)>> GetAll()
         {
             var msgEntities = await _context.Messages.AsNoTracking().ToListAsync();
 

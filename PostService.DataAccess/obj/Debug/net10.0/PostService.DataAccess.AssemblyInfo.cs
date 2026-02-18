@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PostService.DataAccess")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c666f716593e00e26d21c5df7c3db817be0ec29c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+12d59a3a688ceb86116300e41d244b9778ec1250")]
 [assembly: System.Reflection.AssemblyProductAttribute("PostService.DataAccess")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PostService.DataAccess")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

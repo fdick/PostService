@@ -24,9 +24,17 @@
 
         public List<Guid> SubMessagesIDs { get; }
 
-        public static Message Create(Guid ID, Guid threadID, string msg, int likeQuantity, int dislikeQuantity, DateTime createTime, List<Guid> subMessages)
+        public static (Message, string) Create(Guid ID, Guid threadID, string msg, int likeQuantity, int dislikeQuantity, DateTime createTime, List<Guid> subMessages)
         {
-            return new Message(ID, threadID, msg, likeQuantity, dislikeQuantity, createTime, subMessages);
+            string error = string.Empty;
+
+            if (string.IsNullOrEmpty(msg))
+            {
+                error = "Message can not be null";
+            }
+            var m = new Message(ID, threadID, msg, likeQuantity, dislikeQuantity, createTime, subMessages);
+
+            return (m, error);
         }
     }
 }

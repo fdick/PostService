@@ -21,3 +21,15 @@ D:\Projects\Server\PostService\PostService.Core\obj\Debug\net10.0\PostService.Co
 D:\Projects\Server\PostService\PostService.Core\obj\Debug\net10.0\refint\PostService.Core.dll
 D:\Projects\Server\PostService\PostService.Core\obj\Debug\net10.0\PostService.Core.pdb
 D:\Projects\Server\PostService\PostService.Core\obj\Debug\net10.0\ref\PostService.Core.dll
+D:\Projects\PostService\PostService.Core\bin\Debug\net10.0\PostService.Core.deps.json
+D:\Projects\PostService\PostService.Core\bin\Debug\net10.0\PostService.Core.dll
+D:\Projects\PostService\PostService.Core\bin\Debug\net10.0\PostService.Core.pdb
+D:\Projects\PostService\PostService.Core\obj\Debug\net10.0\PostService.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\PostService\PostService.Core\obj\Debug\net10.0\PostService.Core.AssemblyInfoInputs.cache
+D:\Projects\PostService\PostService.Core\obj\Debug\net10.0\PostService.Core.AssemblyInfo.cs
+D:\Projects\PostService\PostService.Core\obj\Debug\net10.0\PostService.Core.csproj.CoreCompileInputs.cache
+D:\Projects\PostService\PostService.Core\obj\Debug\net10.0\PostService.Core.sourcelink.json
+D:\Projects\PostService\PostService.Core\obj\Debug\net10.0\PostService.Core.dll
+D:\Projects\PostService\PostService.Core\obj\Debug\net10.0\refint\PostService.Core.dll
+D:\Projects\PostService\PostService.Core\obj\Debug\net10.0\PostService.Core.pdb
+D:\Projects\PostService\PostService.Core\obj\Debug\net10.0\ref\PostService.Core.dll
