@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PostService.API.Contracts;
-using PostService.Application.Services;
+using PostService.Core.Abstractions;
 using PostService.Core.Models;
 
 namespace PostService.API.Controllers
@@ -21,7 +21,16 @@ namespace PostService.API.Controllers
         {
             var messages = await _messagesService.GetAllMessages();
 
-            var response = messages.Select(x => new MessagesResponse(x.Item1.ID, x.Item1.ThreadID, x.Item1.Msg, x.Item1.LikeQuantity, x.Item1.DislikeQuantity, x.Item1.CreateTime));
+            var response = messages.Select(x => new MessagesResponse(
+                x.Item1.ID,
+                x.Item1.ThreadID,
+                x.Item1.UserID,
+                x.Item1.Msg,
+                x.Item1.LikeQuantity,
+                x.Item1.DislikeQuantity,
+                x.Item1.CreateTime,
+                x.Item1.ParentMessageID
+                ));
 
             return Ok(response);
         }
@@ -32,12 +41,15 @@ namespace PostService.API.Controllers
             var (msg, error) = Message.Create(
                 Guid.NewGuid(),
                 request.threadId,
+                request.userId,
                 request.msg,
                 request.likesQuantity,
                 request.dislikeQuantity,
-                request.createTime,
-                new List<Guid>()
+                DateTime.UtcNow,
+                request.parentMsgId
                 );
+
+
 
             if (!string.IsNullOrEmpty(error))
             {
@@ -45,6 +57,11 @@ namespace PostService.API.Controllers
             }
 
             var msgID = await _messagesService.CreateMessage(msg);
+
+            if (msgID == Guid.Empty)
+            {
+                return BadRequest("Stupid request\n" + request);
+            }
 
             return Ok(msgID);
         }

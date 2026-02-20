@@ -17,6 +17,10 @@ builder.Services.AddDbContext<PostServiceDbContext>(opt =>
 
 builder.Services.AddScoped<IMessagesService, MessagesService>();
 builder.Services.AddScoped<IMessagesRepository, MessagesRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UsersService>();
+builder.Services.AddScoped<IThreadService, ThreadsService>();
+builder.Services.AddScoped<IThreadRepository, ThreadRepository>();
 
 var app = builder.Build();
 

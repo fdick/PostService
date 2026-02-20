@@ -14,11 +14,15 @@ namespace PostService.DataAccess.Configurations
         {
             builder.HasKey(x => x.ID);
 
+            builder.HasOne(x => x.User).WithMany(x => x.Messages).HasForeignKey(x => x.UserID);  
+
             builder.Property(x => x.Message)
                 .HasMaxLength(Message.MAX_MESSAGE_LENGTH)
                 .IsRequired();
 
             builder.Property(x => x.CreateTime).IsRequired();
+
+            builder.Property(x => x.UserID).IsRequired();
         }
     }
 }

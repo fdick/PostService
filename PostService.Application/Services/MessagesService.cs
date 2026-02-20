@@ -19,7 +19,23 @@ namespace PostService.Application.Services
 
         public async Task<Guid> CreateMessage(Message msg)
         {
-            return await _msgRepository.Create(msg);
+            try
+            {
+                //check for existing parent message by provided ID
+                if (msg.ParentMessageID != null)
+                {
+                    var m = await _msgRepository.GetOne(msg.ParentMessageID.Value);
+                    if (m.Item1 == null)
+                        throw new Exception("Provided ID doesn't exist!");
+
+                }
+
+                return await _msgRepository.Create(msg);
+            }
+            catch (Exception e)
+            {
+                return Guid.Empty;
+            }
         }
 
         public async Task<Guid> UpdateMessage(Guid id, string msg, int likesQuantity, int dislikesQuantity)

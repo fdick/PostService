@@ -1,6 +1,6 @@
 ﻿using PostService.Core.Models;
 
-namespace PostService.Application.Services
+namespace PostService.Core.Abstractions
 {
     public interface IMessagesService
     {

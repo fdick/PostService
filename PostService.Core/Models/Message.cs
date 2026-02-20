@@ -4,7 +4,7 @@
     {
         public const int MAX_MESSAGE_LENGTH = 5000;
 
-        private Message(Guid ID, Guid threadID, string msg, int likeQuantity, int dislikeQuantity, DateTime createTime, List<Guid> subMessages)
+        private Message(Guid ID, Guid threadID, Guid userID, string msg, int likeQuantity, int dislikeQuantity, DateTime createTime, Guid? parentMessageId)
         {
             this.ID = ID;
             ThreadID = threadID;
@@ -12,19 +12,20 @@
             LikeQuantity = likeQuantity;
             DislikeQuantity = dislikeQuantity;
             CreateTime = createTime;
-            SubMessagesIDs = subMessages;
+            ParentMessageID = parentMessageId;
+            UserID = userID;
         }
 
         public Guid ID { get; }
         public Guid ThreadID { get; }
+        public Guid UserID { get; set; }
         public string Msg { get; }
         public int LikeQuantity { get; }
         public int DislikeQuantity { get; }
         public DateTime CreateTime { get; }
+        public Guid? ParentMessageID { get; }
 
-        public List<Guid> SubMessagesIDs { get; }
-
-        public static (Message, string) Create(Guid ID, Guid threadID, string msg, int likeQuantity, int dislikeQuantity, DateTime createTime, List<Guid> subMessages)
+        public static (Message, string) Create(Guid ID, Guid threadID, Guid userID, string msg, int likeQuantity, int dislikeQuantity, DateTime createTime, Guid? parentMessageId)
         {
             string error = string.Empty;
 
@@ -32,7 +33,8 @@
             {
                 error = "Message can not be null";
             }
-            var m = new Message(ID, threadID, msg, likeQuantity, dislikeQuantity, createTime, subMessages);
+
+            var m = new Message(ID, threadID, userID, msg, likeQuantity, dislikeQuantity, createTime, parentMessageId);
 
             return (m, error);
         }

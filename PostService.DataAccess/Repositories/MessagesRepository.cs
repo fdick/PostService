@@ -18,9 +18,20 @@ namespace PostService.DataAccess.Repositories
         {
             var msgEntities = await _context.Messages.AsNoTracking().ToListAsync();
 
-            var messages = msgEntities.Select(x => Message.Create(x.ID, x.ThreadID, x.Message, x.LikeQuantity, x.DislikeQuantity, x.CreateTime, x.SubMessagesIDs)).ToList();
+            var messages = msgEntities.Select(x => Message.Create(x.ID, x.ThreadID, x.UserID, x.Message, x.LikeQuantity, x.DislikeQuantity, x.CreateTime, x.ParentMessageID)).ToList();
 
             return messages;
+        }
+        public async Task<(Message, string)> GetOne(Guid Id)
+        {
+            var x = await _context.Messages.SingleOrDefaultAsync(x => x.ID == Id);
+
+            if (x == null) 
+                return (null, string.Empty);
+
+            var msg = Message.Create(x.ID, x.ThreadID, x.UserID, x.Message, x.LikeQuantity, x.DislikeQuantity, x.CreateTime, x.ParentMessageID);
+
+            return msg;
         }
 
         public async Task<Guid> Create(Message msg)
@@ -33,7 +44,8 @@ namespace PostService.DataAccess.Repositories
                 LikeQuantity = msg.LikeQuantity,
                 DislikeQuantity = msg.DislikeQuantity,
                 CreateTime = msg.CreateTime,
-                SubMessagesIDs = msg.SubMessagesIDs
+                ParentMessageID = msg.ParentMessageID,
+                UserID = msg.UserID,
             };
 
             await _context.Messages.AddAsync(entity);
@@ -63,5 +75,6 @@ namespace PostService.DataAccess.Repositories
 
             return id;
         }
+
     }
 }
