@@ -17,6 +17,12 @@ namespace PostService.Application.Services
             return await _msgRepository.GetAll();
         }
 
+        public async Task<List<(Message, string)>> GetMessagesInThreadAsync(Guid threadId)
+        {
+            return await _msgRepository.GetAllInThread(threadId);
+
+        }
+
         public async Task<Guid> CreateMessage(Message msg)
         {
             try

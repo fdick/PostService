@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PostService.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7e82a8463ca877ba07ed4275a7d5ad3866a53d5e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+90d199f409a1c48432ece682f0fe92838558f264")]
 [assembly: System.Reflection.AssemblyProductAttribute("PostService.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PostService.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
