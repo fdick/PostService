@@ -12,7 +12,7 @@ namespace PostService.Application.Services
         {
             this._msgService = msgService;
         }
-        public override async Task<MessageResponse> GetMessagesAsync(MessageRequest request, ServerCallContext context)
+        public override async Task<MessageResponse> GetMessages(MessageRequest request, ServerCallContext context)
         {
             if (!Guid.TryParse(request.ThreadID, out var threadId))
             {
