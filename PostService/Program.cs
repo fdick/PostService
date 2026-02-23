@@ -1,4 +1,6 @@
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using PostService.API.GRPC;
 using PostService.Application.Services;
 using PostService.Core.Abstractions;
 using PostService.DataAccess;
@@ -14,6 +16,22 @@ builder.Services.AddGrpc();
 builder.Services.AddDbContext<PostServiceDbContext>(opt =>
 {
     opt.UseNpgsql(builder.Configuration.GetConnectionString(nameof(PostServiceDbContext)));
+});
+
+builder.Services.AddMassTransit(busConfigurator =>
+{
+    busConfigurator.SetKebabCaseEndpointNameFormatter();
+
+    busConfigurator.UsingRabbitMq((ctx, configurator) =>
+    {
+        configurator.Host(new Uri(builder.Configuration["MessageBroker:Host"]), h =>
+        {
+            h.Username(builder.Configuration["MessageBroker:Username"]);
+            h.Password(builder.Configuration["MessageBroker:Password"]);
+        });
+
+        configurator.ConfigureEndpoints(ctx);
+    });
 });
 
 builder.Services.AddScoped<IMessagesService, MessagesService>();
@@ -54,7 +72,7 @@ app.UseCors();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapGrpcService<GRPCMessagesService>();
+    endpoints.MapGrpcService<GRPCMessagesController>();
 });
 
 //app.UseHttpsRedirection();

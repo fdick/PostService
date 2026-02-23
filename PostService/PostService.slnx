@@ -2,5 +2,7 @@
   <Project Path="../PostService.Application/PostService.Application.csproj" Id="cf19d70a-7796-43d7-bd97-d052eda5e555" />
   <Project Path="../PostService.Core/PostService.Core.csproj" />
   <Project Path="../PostService.DataAccess/PostService.DataAccess.csproj" />
+  <Project Path="../PostService.GRPC.API/PostService.API.GRPC.csproj" Id="82c8d1fd-3a49-4cdb-9085-8ce22d39a09d" />
+  <Project Path="../PostService.RabbitMQ/PostService.RabbitMQ.csproj" Id="4790f2e5-c83d-473b-8c16-56e61f571160" />
   <Project Path="PostService.API.csproj" />
 </Solution>

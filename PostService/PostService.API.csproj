@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.76.0" />
     <PackageReference Include="Grpc.AspNetCore.Web" Version="2.76.0" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="9.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PostService.Application\PostService.Application.csproj" />
     <ProjectReference Include="..\PostService.DataAccess\PostService.DataAccess.csproj" />
+    <ProjectReference Include="..\PostService.GRPC.API\PostService.API.GRPC.csproj" />
   </ItemGroup>
 
 </Project>

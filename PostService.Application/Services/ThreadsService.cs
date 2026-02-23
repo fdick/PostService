@@ -21,12 +21,12 @@ namespace PostService.Application.Services
             return await _repository.Create(thread);
         }
 
-        public async Task<Guid> DeleteUserAsync(Guid id)
+        public async Task<Guid> DeleteThreadAsync(Guid id)
         {
             return await _repository.Delete(id);
         }
 
-        public async Task<Guid> UpdateUserAsync(Guid id, string name, Guid authorId)
+        public async Task<Guid> UpdateThreadAsync(Guid id, string name, Guid authorId)
         {
             return await _repository.Update(id, name, authorId);
         }

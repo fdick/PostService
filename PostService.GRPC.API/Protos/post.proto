@@ -1,25 +1,23 @@
 syntax = "proto3";
 
-option csharp_namespace = "PostService.API.Protos";
+option csharp_namespace = "PostService.API.GRPC.Protos";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
-//package post;
-
-service GRPCMessagesService {
-	rpc GetMessages (MessageRequest) returns (MessageResponse);
+service GRPCMessagesController {
+	rpc GetMessages (GRPCMessageRequest) returns (GRPCMessageResponse);
 }
 
-message MessageRequest {
+message GRPCMessageRequest {
 	string threadID = 1;
 }
 
-message MessageResponse {
-	repeated Message messages = 1;
+message GRPCMessageResponse {
+	repeated GRPCMessage messages = 1;
 }
 
-message Message {
+message GRPCMessage {
     string threadId = 1;              // Guid threadId
     string userId = 2;                 // Guid userId
     string content = 3;                // string msg
@@ -27,8 +25,4 @@ message Message {
     int32 dislikesQuantity = 5;        // int dislikeQuantity
     google.protobuf.Timestamp createdAt = 6;  // DateTime createTime
     google.protobuf.StringValue parentMessageId = 7;  // Guid? parentMessageId (nullable)
-    
-    // Дополнительные поля для удобства
-    //UserInfo user = 9;                  // Информация о пользователе
-    //int32 repliesCount = 10;            // Количество ответов на это сообщение
 }
