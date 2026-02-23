@@ -19,7 +19,7 @@ namespace PostService.API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<MessagesResponse>>> GetMessages()
         {
-            var messages = await _messagesService.GetAllMessages();
+            var messages = await _messagesService.GetAllMessagesAsync();
 
             var response = messages.Select(x => new MessagesResponse(
                 x.Item1.ID,
@@ -56,7 +56,7 @@ namespace PostService.API.Controllers
                 return BadRequest(error);
             }
 
-            var msgID = await _messagesService.CreateMessage(msg);
+            var msgID = await _messagesService.CreateMessageAsync(msg);
 
             if (msgID == Guid.Empty)
             {
@@ -69,7 +69,7 @@ namespace PostService.API.Controllers
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult<Guid>> DeleteMessage(Guid id)
         {
-            var guid = await _messagesService.DeleteMessage(id);
+            var guid = await _messagesService.DeleteMessageAsync(id);
 
             return Ok(guid);
         }
@@ -77,7 +77,7 @@ namespace PostService.API.Controllers
         [HttpPut("{id:guid}")]
         public async Task<ActionResult<Guid>> UpdateMessage(Guid id, [FromBody] MessagesRequest request)
         {
-            var guid = await _messagesService.UpdateMessage(id, request.msg, request.likesQuantity, request.dislikeQuantity);
+            var guid = await _messagesService.UpdateMessageAsync(id, request.msg, request.likesQuantity, request.dislikeQuantity);
 
             return Ok(guid);
         }

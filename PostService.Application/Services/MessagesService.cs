@@ -12,7 +12,7 @@ namespace PostService.Application.Services
             this._msgRepository = msgRepository;
         }
 
-        public async Task<List<(Message, string)>> GetAllMessages()
+        public async Task<List<(Message, string)>> GetAllMessagesAsync()
         {
             return await _msgRepository.GetAll();
         }
@@ -23,7 +23,7 @@ namespace PostService.Application.Services
 
         }
 
-        public async Task<Guid> CreateMessage(Message msg)
+        public async Task<Guid> CreateMessageAsync(Message msg)
         {
             try
             {
@@ -44,12 +44,12 @@ namespace PostService.Application.Services
             }
         }
 
-        public async Task<Guid> UpdateMessage(Guid id, string msg, int likesQuantity, int dislikesQuantity)
+        public async Task<Guid> UpdateMessageAsync(Guid id, string msg, int likesQuantity, int dislikesQuantity)
         {
             return await _msgRepository.Update(id, msg, likesQuantity, dislikesQuantity);
         }
 
-        public async Task<Guid> DeleteMessage(Guid ID)
+        public async Task<Guid> DeleteMessageAsync(Guid ID)
         {
             return await _msgRepository.Delete(ID);
         }

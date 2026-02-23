@@ -18,7 +18,7 @@ namespace PostService.API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ThreadResponse>>> GetAllUsers()
         {
-            var users = await _service.GetAllThreads();
+            var users = await _service.GetAllThreadsAsync();
 
             var respons = users.Select(x => new ThreadResponse(x.Item1.ID, x.Item1.Name, x.Item1.AuthorID)).ToList();
 
@@ -39,7 +39,7 @@ namespace PostService.API.Controllers
                 return BadRequest(error);
             }
 
-            var id = await _service.CreateThread(thread);
+            var id = await _service.CreateThreadAsync(thread);
 
             if (id == Guid.Empty)
             {

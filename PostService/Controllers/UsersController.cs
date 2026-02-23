@@ -18,7 +18,7 @@ namespace PostService.API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<UserResponse>>> GetAllUsers()
         {
-            var users = await _service.GetAllUsers();
+            var users = await _service.GetAllUsersAsync();
 
             var respons = users.Select(x => new UserResponse(x.Item1.ID, x.Item1.Name, x.Item1.LastName, x.Item1.Nickname, x.Item1.Email)).ToList();
 
@@ -41,7 +41,7 @@ namespace PostService.API.Controllers
                 return BadRequest(error);
             }
 
-            var id = await _service.CreateUser(user);
+            var id = await _service.CreateUserAsync(user);
 
             if (id == Guid.Empty)
             {
