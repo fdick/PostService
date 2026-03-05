@@ -1,3 +1,5 @@
+Microservice for proccessing posts
+
 **Stack:**  REST, gRPC, CQRS, EF Core, postgres, rabbitMQ.MassTransit, docker
 
 CQRS:  
