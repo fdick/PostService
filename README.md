@@ -1,5 +1,5 @@
-Stack:  REST, gRPC, CQRS, EF Core, postgres, rabbitMQ.MassTransit, docker
+**Stack:**  REST, gRPC, CQRS, EF Core, postgres, rabbitMQ.MassTransit, docker
 
-CQRS:
+CQRS:  
 W - EF Core, MediatR  
 R - Dapper, Linq2Db
