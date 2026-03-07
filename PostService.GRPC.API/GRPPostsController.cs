@@ -1,29 +1,29 @@
 ﻿using Grpc.Core;
 using PostService.API.GRPC.Protos;
 using PostService.Core.Abstractions;
-using static PostService.API.GRPC.Protos.GRPCMessagesController;
+using static PostService.API.GRPC.Protos.GRPCPostsController;
 
 namespace PostService.API.GRPC
 {
-    public class GRPCMessagesController : GRPCMessagesControllerBase
+    public class GRPPostsController : GRPCPostsControllerBase
     {
         private readonly IMessagesService _msgService;
 
-        public GRPCMessagesController(IMessagesService msgService)
+        public GRPPostsController(IMessagesService msgService)
         {
             this._msgService = msgService;
         }
-        public override async Task<GRPCMessageResponse> GetMessages(GRPCMessageRequest request, ServerCallContext context)
+        public override async Task<GRPCPostResponse> GetMessages(GRPCPostRequest request, ServerCallContext context)
         {
             if (!Guid.TryParse(request.ThreadID, out var threadId))
             {
                 throw new RpcException(new Status(StatusCode.InvalidArgument, "Invalid thread ID format"));
             }
 
-            var messages = await _msgService.GetMessagesInThreadAsync(threadId);
+            var messages = await _msgService.GetPostsInThreadAsync(threadId);
 
-            var response = new GRPCMessageResponse();
-            response.Messages.AddRange(messages.Select(m => new GRPCMessage()
+            var response = new GRPCPostResponse();
+            response.Posts.AddRange(messages.Select(m => new GRPCPost()
             {
                 ThreadId = m.Item1.ThreadID.ToString(),
                 UserId = m.Item1.UserID.ToString(),

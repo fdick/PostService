@@ -4,10 +4,10 @@ namespace PostService.Core.Abstractions
 {
     public interface IMessagesService
     {
-        Task<Guid> CreateMessageAsync(Message msg);
-        Task<Guid> DeleteMessageAsync(Guid ID);
-        Task<List<(Message, string)>> GetAllMessagesAsync();
-        Task<List<(Message, string)>> GetMessagesInThreadAsync(Guid threadId);
-        Task<Guid> UpdateMessageAsync(Guid id, string msg, int likesQuantity, int dislikesQuantity);
+        Task<Guid> CreatePostAsync(Post msg);
+        Task<Guid> DeletePostAsync(Guid ID);
+        Task<List<(Post, string)>> GetAllPostsAsync();
+        Task<List<(Post, string)>> GetPostsInThreadAsync(Guid threadId);
+        Task<Guid> UpdatePostAsync(Guid id, string msg, int likesQuantity, int dislikesQuantity);
     }
 }

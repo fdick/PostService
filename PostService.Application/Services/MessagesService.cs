@@ -12,18 +12,18 @@ namespace PostService.Application.Services
             this._msgRepository = msgRepository;
         }
 
-        public async Task<List<(Message, string)>> GetAllMessagesAsync()
+        public async Task<List<(Post, string)>> GetAllPostsAsync()
         {
             return await _msgRepository.GetAll();
         }
 
-        public async Task<List<(Message, string)>> GetMessagesInThreadAsync(Guid threadId)
+        public async Task<List<(Post, string)>> GetPostsInThreadAsync(Guid threadId)
         {
             return await _msgRepository.GetAllInThread(threadId);
 
         }
 
-        public async Task<Guid> CreateMessageAsync(Message msg)
+        public async Task<Guid> CreatePostAsync(Post msg)
         {
             try
             {
@@ -44,12 +44,12 @@ namespace PostService.Application.Services
             }
         }
 
-        public async Task<Guid> UpdateMessageAsync(Guid id, string msg, int likesQuantity, int dislikesQuantity)
+        public async Task<Guid> UpdatePostAsync(Guid id, string msg, int likesQuantity, int dislikesQuantity)
         {
             return await _msgRepository.Update(id, msg, likesQuantity, dislikesQuantity);
         }
 
-        public async Task<Guid> DeleteMessageAsync(Guid ID)
+        public async Task<Guid> DeletePostAsync(Guid ID)
         {
             return await _msgRepository.Delete(ID);
         }

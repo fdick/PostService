@@ -5,6 +5,7 @@ using PostService.Application.Services;
 using PostService.Core.Abstractions;
 using PostService.DataAccess;
 using PostService.DataAccess.Repositories;
+using PostService.RabbitMQ.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,9 @@ builder.Services.AddMassTransit(busConfigurator =>
 {
     busConfigurator.SetKebabCaseEndpointNameFormatter();
 
+    busConfigurator.AddConsumer<UsersConsumer>();
+    busConfigurator.AddConsumer<ThreadsConsumer>();
+
     busConfigurator.UsingRabbitMq((ctx, configurator) =>
     {
         configurator.Host(new Uri(builder.Configuration["MessageBroker:Host"]), h =>
@@ -35,7 +39,7 @@ builder.Services.AddMassTransit(busConfigurator =>
 });
 
 builder.Services.AddScoped<IMessagesService, MessagesService>();
-builder.Services.AddScoped<IMessagesRepository, MessagesRepository>();
+builder.Services.AddScoped<IMessagesRepository, PostsRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UsersService>();
 builder.Services.AddScoped<IThreadService, ThreadsService>();
@@ -72,7 +76,7 @@ app.UseCors();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapGrpcService<GRPCMessagesController>();
+    endpoints.MapGrpcService<GRPPostsController>();
 });
 
 //app.UseHttpsRedirection();
@@ -80,8 +84,5 @@ app.UseEndpoints(endpoints =>
 app.UseAuthorization();
 
 app.MapControllers();
-
-//app.MapGet("/", () => "Hello World!");
-//app.MapGet("/up", () => "it's custom page");
 
 app.Run();

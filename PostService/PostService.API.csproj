@@ -22,7 +22,8 @@
   <ItemGroup>
     <ProjectReference Include="..\PostService.Application\PostService.Application.csproj" />
     <ProjectReference Include="..\PostService.DataAccess\PostService.DataAccess.csproj" />
-    <ProjectReference Include="..\PostService.GRPC.API\PostService.API.GRPC.csproj" />
+    <ProjectReference Include="..\PostService.GRPC.API\PostService.GRPC.Server.csproj" />
+    <ProjectReference Include="..\PostService.RabbitMQ\PostService.RabbitMQ.csproj" />
   </ItemGroup>
 
 </Project>

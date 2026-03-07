@@ -1,6 +1,6 @@
 ﻿namespace PostService.DataAccess.Entities
 {
-    public class MessageEntity
+    public class PostEntity
     {
         public Guid ID { get; set; }
         public string Message { get; set; } = string.Empty;

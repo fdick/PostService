@@ -1,10 +1,10 @@
 ﻿namespace PostService.Core.Models
 {
-    public class Message
+    public class Post
     {
         public const int MAX_MESSAGE_LENGTH = 5000;
 
-        private Message(Guid ID, Guid threadID, Guid userID, string msg, int likeQuantity, int dislikeQuantity, DateTime createTime, Guid? parentMessageId)
+        private Post(Guid ID, Guid threadID, Guid userID, string msg, int likeQuantity, int dislikeQuantity, DateTime createTime, Guid? parentMessageId)
         {
             this.ID = ID;
             ThreadID = threadID;
@@ -25,7 +25,7 @@
         public DateTime CreateTime { get; }
         public Guid? ParentMessageID { get; }
 
-        public static (Message, string) Create(Guid ID, Guid threadID, Guid userID, string msg, int likeQuantity, int dislikeQuantity, DateTime createTime, Guid? parentMessageId)
+        public static (Post, string) Create(Guid ID, Guid threadID, Guid userID, string msg, int likeQuantity, int dislikeQuantity, DateTime createTime, Guid? parentMessageId)
         {
             string error = string.Empty;
 
@@ -34,7 +34,7 @@
                 error = "Message can not be null";
             }
 
-            var m = new Message(ID, threadID, userID, msg, likeQuantity, dislikeQuantity, createTime, parentMessageId);
+            var m = new Post(ID, threadID, userID, msg, likeQuantity, dislikeQuantity, createTime, parentMessageId);
 
             return (m, error);
         }

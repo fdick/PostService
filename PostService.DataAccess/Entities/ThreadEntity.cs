@@ -8,6 +8,6 @@
 
         public Guid AuthorID { get; set; }
         public UserEntity Author { get; set; }
-        public List<MessageEntity>? Messages { get; set; } = new List<MessageEntity>();
+        public List<PostEntity>? Messages { get; set; } = new List<PostEntity>();
     }
 }

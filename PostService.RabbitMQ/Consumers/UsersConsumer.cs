@@ -3,9 +3,6 @@ using PostService.Core.Abstractions;
 using PostService.Core.Models;
 using PostService.RabbitMQ.Contracts;
 using PostService.RabbitMQ.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PostService.RabbitMQ.Consumers
 {

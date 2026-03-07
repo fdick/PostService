@@ -25,12 +25,12 @@ namespace PostService.DataAccess.Repositories
         {
             var userEntity = new UserEntity()
             {
-                ID = Guid.NewGuid(),
+                ID = user.ID,
                 Nickname = user.Nickname,
                 Name = user.Name,
                 LastName = user.LastName,
                 Email = user.Email,
-                Messages = new List<MessageEntity>(),
+                Messages = new List<PostEntity>(),
             };
             await _context.Users.AddAsync(userEntity);
             await _context.SaveChangesAsync();

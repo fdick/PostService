@@ -8,6 +8,6 @@
         public string LastName { get; set; }
         public string Email { get; set; }
 
-        public List<MessageEntity>? Messages { get; set; } = new List<MessageEntity>();
+        public List<PostEntity>? Messages { get; set; } = new List<PostEntity>();
     }
 }

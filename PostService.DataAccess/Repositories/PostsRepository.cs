@@ -5,48 +5,48 @@ using PostService.DataAccess.Entities;
 
 namespace PostService.DataAccess.Repositories
 {
-    public class MessagesRepository : IMessagesRepository
+    public class PostsRepository : IMessagesRepository
     {
         private readonly PostServiceDbContext _context;
 
-        public MessagesRepository(PostServiceDbContext context)
+        public PostsRepository(PostServiceDbContext context)
         {
             this._context = context;
         }
 
-        public async Task<List<(Message, string)>> GetAll()
+        public async Task<List<(Post, string)>> GetAll()
         {
             var msgEntities = await _context.Messages.AsNoTracking().ToListAsync();
 
-            var messages = msgEntities.Select(x => Message.Create(x.ID, x.ThreadID, x.UserID, x.Message, x.LikeQuantity, x.DislikeQuantity, x.CreateTime, x.ParentMessageID)).ToList();
+            var messages = msgEntities.Select(x => Post.Create(x.ID, x.ThreadID, x.UserID, x.Message, x.LikeQuantity, x.DislikeQuantity, x.CreateTime, x.ParentMessageID)).ToList();
 
             return messages;
         }
 
-        public async Task<(Message, string)> GetOne(Guid Id)
+        public async Task<(Post, string)> GetOne(Guid Id)
         {
             var x = await _context.Messages.SingleOrDefaultAsync(x => x.ID == Id);
 
             if (x == null) 
                 return (null, string.Empty);
 
-            var msg = Message.Create(x.ID, x.ThreadID, x.UserID, x.Message, x.LikeQuantity, x.DislikeQuantity, x.CreateTime, x.ParentMessageID);
+            var msg = Post.Create(x.ID, x.ThreadID, x.UserID, x.Message, x.LikeQuantity, x.DislikeQuantity, x.CreateTime, x.ParentMessageID);
 
             return msg;
         }
 
-        public async Task<List<(Message, string)>> GetAllInThread(Guid threadId)
+        public async Task<List<(Post, string)>> GetAllInThread(Guid threadId)
         {
             var entities = await _context.Messages.AsNoTracking().Where(x => x.ThreadID == threadId).ToListAsync();
 
-            var messages = entities.Select(x => Message.Create(x.ID, x.ThreadID, x.UserID, x.Message, x.LikeQuantity, x.DislikeQuantity, x.CreateTime, x.ParentMessageID)).ToList();
+            var messages = entities.Select(x => Post.Create(x.ID, x.ThreadID, x.UserID, x.Message, x.LikeQuantity, x.DislikeQuantity, x.CreateTime, x.ParentMessageID)).ToList();
 
             return messages;
         }
 
-        public async Task<Guid> Create(Message msg)
+        public async Task<Guid> Create(Post msg)
         {
-            var entity = new MessageEntity
+            var entity = new PostEntity
             {
                 ID = msg.ID,
                 ThreadID = msg.ThreadID,

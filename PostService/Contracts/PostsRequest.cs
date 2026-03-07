@@ -1,6 +1,6 @@
 ﻿namespace PostService.API.Contracts
 {
-    public record MessagesRequest(
+    public record PostsRequest(
         Guid threadId,
         Guid userId,
         string msg,

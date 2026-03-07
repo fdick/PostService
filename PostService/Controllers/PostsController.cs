@@ -7,21 +7,21 @@ namespace PostService.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class MessagesController : ControllerBase
+    public class PostsController : ControllerBase
     {
         private readonly IMessagesService _messagesService;
 
-        public MessagesController(IMessagesService messagesService)
+        public PostsController(IMessagesService messagesService)
         {
             this._messagesService = messagesService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<MessagesResponse>>> GetMessages()
+        public async Task<ActionResult<List<PostsResponse>>> GetPosts()
         {
-            var messages = await _messagesService.GetAllMessagesAsync();
+            var messages = await _messagesService.GetAllPostsAsync();
 
-            var response = messages.Select(x => new MessagesResponse(
+            var response = messages.Select(x => new PostsResponse(
                 x.Item1.ID,
                 x.Item1.ThreadID,
                 x.Item1.UserID,
@@ -36,9 +36,9 @@ namespace PostService.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateMessage([FromBody] MessagesRequest request)
+        public async Task<ActionResult<Guid>> CreatePost([FromBody] PostsRequest request)
         {
-            var (msg, error) = Message.Create(
+            var (msg, error) = Post.Create(
                 Guid.NewGuid(),
                 request.threadId,
                 request.userId,
@@ -56,7 +56,7 @@ namespace PostService.API.Controllers
                 return BadRequest(error);
             }
 
-            var msgID = await _messagesService.CreateMessageAsync(msg);
+            var msgID = await _messagesService.CreatePostAsync(msg);
 
             if (msgID == Guid.Empty)
             {
@@ -67,17 +67,17 @@ namespace PostService.API.Controllers
         }
 
         [HttpDelete("{id:guid}")]
-        public async Task<ActionResult<Guid>> DeleteMessage(Guid id)
+        public async Task<ActionResult<Guid>> DeletePost(Guid id)
         {
-            var guid = await _messagesService.DeleteMessageAsync(id);
+            var guid = await _messagesService.DeletePostAsync(id);
 
             return Ok(guid);
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<ActionResult<Guid>> UpdateMessage(Guid id, [FromBody] MessagesRequest request)
+        public async Task<ActionResult<Guid>> UpdatePost(Guid id, [FromBody] PostsRequest request)
         {
-            var guid = await _messagesService.UpdateMessageAsync(id, request.msg, request.likesQuantity, request.dislikeQuantity);
+            var guid = await _messagesService.UpdatePostAsync(id, request.msg, request.likesQuantity, request.dislikeQuantity);
 
             return Ok(guid);
         }
