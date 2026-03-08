@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PostService.DataAccess;
@@ -11,9 +12,11 @@ using PostService.DataAccess;
 namespace PostService.DataAccess.Migrations
 {
     [DbContext(typeof(PostServiceDbContext))]
-    partial class PostServiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260308173607_fixDB")]
+    partial class fixDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

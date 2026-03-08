@@ -1,4 +1,4 @@
 ﻿namespace PostService.API.Contracts
 {
-    public record ThreadRequest(string name, Guid authorId);
+    public record ThreadRequest(Guid Id, string name, Guid authorId);
 }

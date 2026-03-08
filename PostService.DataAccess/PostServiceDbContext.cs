@@ -9,7 +9,7 @@ namespace PostService.DataAccess
         {
         }
 
-        public DbSet<PostEntity> Messages { get; set; }
+        public DbSet<PostEntity> Posts { get; set; }
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<ThreadEntity> Threads { get; set; }
     }

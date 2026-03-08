@@ -2,7 +2,7 @@
 
 namespace PostService.Core.Abstractions
 {
-    public interface IMessagesRepository
+    public interface IPostsRepository
     {
         Task<Guid> Create(Post msg);
         Task<Guid> Delete(Guid id);

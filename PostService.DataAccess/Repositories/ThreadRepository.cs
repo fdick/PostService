@@ -37,7 +37,7 @@ namespace PostService.DataAccess.Repositories
         {
             var entity = new ThreadEntity()
             {
-                ID = Guid.NewGuid(),
+                ID = thread.ID,
                 Name = thread.Name,
                 AuthorID = thread.AuthorID,
             };

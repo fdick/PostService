@@ -3,11 +3,11 @@ using PostService.Core.Models;
 
 namespace PostService.Application.Services
 {
-    public class MessagesService : IMessagesService
+    public class PostsService : IPostsService
     {
-        private readonly IMessagesRepository _msgRepository;
+        private readonly IPostsRepository _msgRepository;
 
-        public MessagesService(IMessagesRepository msgRepository)
+        public PostsService(IPostsRepository msgRepository)
         {
             this._msgRepository = msgRepository;
         }

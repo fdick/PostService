@@ -5,7 +5,7 @@ using PostService.DataAccess.Entities;
 
 namespace PostService.DataAccess.Repositories
 {
-    public class PostsRepository : IMessagesRepository
+    public class PostsRepository : IPostsRepository
     {
         private readonly PostServiceDbContext _context;
 
@@ -16,7 +16,7 @@ namespace PostService.DataAccess.Repositories
 
         public async Task<List<(Post, string)>> GetAll()
         {
-            var msgEntities = await _context.Messages.AsNoTracking().ToListAsync();
+            var msgEntities = await _context.Posts.AsNoTracking().ToListAsync();
 
             var messages = msgEntities.Select(x => Post.Create(x.ID, x.ThreadID, x.UserID, x.Message, x.LikeQuantity, x.DislikeQuantity, x.CreateTime, x.ParentMessageID)).ToList();
 
@@ -25,7 +25,7 @@ namespace PostService.DataAccess.Repositories
 
         public async Task<(Post, string)> GetOne(Guid Id)
         {
-            var x = await _context.Messages.SingleOrDefaultAsync(x => x.ID == Id);
+            var x = await _context.Posts.SingleOrDefaultAsync(x => x.ID == Id);
 
             if (x == null) 
                 return (null, string.Empty);
@@ -37,7 +37,7 @@ namespace PostService.DataAccess.Repositories
 
         public async Task<List<(Post, string)>> GetAllInThread(Guid threadId)
         {
-            var entities = await _context.Messages.AsNoTracking().Where(x => x.ThreadID == threadId).ToListAsync();
+            var entities = await _context.Posts.AsNoTracking().Where(x => x.ThreadID == threadId).ToListAsync();
 
             var messages = entities.Select(x => Post.Create(x.ID, x.ThreadID, x.UserID, x.Message, x.LikeQuantity, x.DislikeQuantity, x.CreateTime, x.ParentMessageID)).ToList();
 
@@ -58,7 +58,7 @@ namespace PostService.DataAccess.Repositories
                 UserID = msg.UserID,
             };
 
-            await _context.Messages.AddAsync(entity);
+            await _context.Posts.AddAsync(entity);
             await _context.SaveChangesAsync();
 
             return entity.ID;
@@ -66,7 +66,7 @@ namespace PostService.DataAccess.Repositories
 
         public async Task<Guid> Update(Guid id, string msg, int likesQuantity, int dislikesQuantity)
         {
-            await _context.Messages
+            await _context.Posts
                 .Where(x => x.ID == id)
                 .ExecuteUpdateAsync(x => x
                     .SetProperty(r => r.Message, r => msg)
@@ -79,7 +79,7 @@ namespace PostService.DataAccess.Repositories
 
         public async Task<Guid> Delete(Guid id)
         {
-            await _context.Messages
+            await _context.Posts
                 .Where(x => x.ID == id)
                 .ExecuteDeleteAsync();
 

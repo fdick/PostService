@@ -14,7 +14,7 @@ namespace PostService.DataAccess.Configurations
 
             builder.Property(x => x.AuthorID).IsRequired();
 
-            builder.HasMany(x => x.Messages).WithOne(x => x.Thread);
+            builder.HasMany(x => x.Posts).WithOne(x => x.Thread);
 
             builder.HasOne(x => x.Author).WithOne();
         }

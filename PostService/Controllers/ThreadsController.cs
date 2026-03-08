@@ -29,7 +29,7 @@ namespace PostService.API.Controllers
         public async Task<ActionResult<UserRequest>> CreateThread([FromBody] ThreadRequest request)
         {
             var (thread, error) = Core.Models.Thread.Create(
-                Guid.NewGuid(),
+                request.Id,
                 request.name,
                 request.authorId
                 );

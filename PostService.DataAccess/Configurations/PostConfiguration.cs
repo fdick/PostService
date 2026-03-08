@@ -11,7 +11,7 @@ namespace PostService.DataAccess.Configurations
         {
             builder.HasKey(x => x.ID);
 
-            builder.HasOne(x => x.User).WithMany(x => x.Messages).HasForeignKey(x => x.UserID);  
+            builder.HasOne(x => x.User).WithMany(x => x.Posts).HasForeignKey(x => x.UserID);  
 
             builder.Property(x => x.Message)
                 .HasMaxLength(Post.MAX_MESSAGE_LENGTH)

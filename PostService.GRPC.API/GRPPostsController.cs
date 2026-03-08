@@ -7,13 +7,13 @@ namespace PostService.API.GRPC
 {
     public class GRPPostsController : GRPCPostsControllerBase
     {
-        private readonly IMessagesService _msgService;
+        private readonly IPostsService _msgService;
 
-        public GRPPostsController(IMessagesService msgService)
+        public GRPPostsController(IPostsService msgService)
         {
             this._msgService = msgService;
         }
-        public override async Task<GRPCPostResponse> GetMessages(GRPCPostRequest request, ServerCallContext context)
+        public override async Task<GRPCPostResponse> GetPosts(GRPCPostRequest request, ServerCallContext context)
         {
             if (!Guid.TryParse(request.ThreadID, out var threadId))
             {
@@ -25,6 +25,7 @@ namespace PostService.API.GRPC
             var response = new GRPCPostResponse();
             response.Posts.AddRange(messages.Select(m => new GRPCPost()
             {
+                Id = m.Item1.ID.ToString(),
                 ThreadId = m.Item1.ThreadID.ToString(),
                 UserId = m.Item1.UserID.ToString(),
                 Content = m.Item1.Msg,

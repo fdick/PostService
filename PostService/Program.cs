@@ -38,8 +38,8 @@ builder.Services.AddMassTransit(busConfigurator =>
     });
 });
 
-builder.Services.AddScoped<IMessagesService, MessagesService>();
-builder.Services.AddScoped<IMessagesRepository, PostsRepository>();
+builder.Services.AddScoped<IPostsService, PostsService>();
+builder.Services.AddScoped<IPostsRepository, PostsRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UsersService>();
 builder.Services.AddScoped<IThreadService, ThreadsService>();
@@ -52,11 +52,13 @@ builder.WebHost.ConfigureKestrel(options =>
     options.ListenLocalhost(5001, listenOptions =>
     {
         listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1;
+        listenOptions.UseHttps();
     });
 
     options.ListenLocalhost(5002, listenOptions =>
     {
         listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2;
+        listenOptions.UseHttps();
     });
 });
 

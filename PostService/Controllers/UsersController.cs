@@ -29,7 +29,7 @@ namespace PostService.API.Controllers
         public async Task<ActionResult<UserRequest>> Create([FromBody] UserRequest request)
         {
             var (user, error) = Core.Models.User.Create(
-                Guid.NewGuid(),
+                request.id,
                 request.nickname,
                 request.name,
                 request.lastname,

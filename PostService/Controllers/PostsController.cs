@@ -9,9 +9,9 @@ namespace PostService.API.Controllers
     [Route("[controller]")]
     public class PostsController : ControllerBase
     {
-        private readonly IMessagesService _messagesService;
+        private readonly IPostsService _messagesService;
 
-        public PostsController(IMessagesService messagesService)
+        public PostsController(IPostsService messagesService)
         {
             this._messagesService = messagesService;
         }

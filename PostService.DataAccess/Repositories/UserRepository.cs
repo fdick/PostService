@@ -30,7 +30,7 @@ namespace PostService.DataAccess.Repositories
                 Name = user.Name,
                 LastName = user.LastName,
                 Email = user.Email,
-                Messages = new List<PostEntity>(),
+                Posts = new List<PostEntity>(),
             };
             await _context.Users.AddAsync(userEntity);
             await _context.SaveChangesAsync();
