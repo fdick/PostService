@@ -1,11 +1,17 @@
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using PostService.API.GRPC;
 using PostService.Application.Services;
 using PostService.Core.Abstractions;
 using PostService.DataAccess;
 using PostService.DataAccess.Repositories;
 using PostService.RabbitMQ.Consumers;
+using System.Security.Claims;
+using System.Text;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +52,90 @@ builder.Services.AddScoped<IThreadService, ThreadsService>();
 builder.Services.AddScoped<IThreadRepository, ThreadRepository>();
 
 
+var authServerUrl =  "http://localhost:8080";
+var realm =  "main";
+var clientId =  "post-service-client";
+
+var realmUrl = $"{authServerUrl}/realms/{realm}";
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = realmUrl;
+        options.Audience = clientId;
+        options.RequireHttpsMetadata = false; // Только для разработки!
+
+        // ВАЖНО: Не нужен симметричный ключ!
+        // Библиотека автоматически получит публичные ключи от Keycloak
+
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = realmUrl,
+            ValidateAudience = true,
+            ValidAudience = clientId,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.FromMinutes(2)
+        };
+
+        options.Events = new JwtBearerEvents
+        {
+            OnTokenValidated = context =>
+            {
+                // ПОЛУЧАЕМ resource_access
+                var resourceAccess = context.Principal?.FindFirst("resource_access")?.Value;
+                if (string.IsNullOrEmpty(resourceAccess))
+                    return Task.CompletedTask;
+
+                try
+                {
+                    using var doc = JsonDocument.Parse(resourceAccess);
+                    var identity = context.Principal.Identity as ClaimsIdentity;
+
+                    // Проходим по ВСЕМ клиентам в resource_access
+                    foreach (var client in doc.RootElement.EnumerateObject())
+                    {
+                        var clientName = client.Name;
+
+                        // Получаем роли для этого клиента
+                        if (client.Value.TryGetProperty("roles", out var roles))
+                        {
+                            foreach (var role in roles.EnumerateArray())
+                            {
+                                var roleValue = role.GetString();
+                                if (!string.IsNullOrEmpty(roleValue))
+                                {
+                                    // Добавляем роль в формате: "client_name.role_name"
+                                    identity?.AddClaim(new Claim(ClaimTypes.Role, $"{clientName}.{roleValue}"));
+
+                                    // Также добавляем просто название роли (если нужно)
+                                    identity?.AddClaim(new Claim(ClaimTypes.Role, roleValue));
+
+                                    Console.WriteLine($"Added role: {clientName}.{roleValue}");
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error parsing roles: {ex.Message}");
+                }
+
+                return Task.CompletedTask;
+            }
+        };
+    });
+
+//builder.Services.AddAuthorization(opt =>
+//{
+//    opt.AddPolicy("GrpcPolicy", policy =>
+//    {
+//        policy.RequireAuthenticatedUser();
+//    });
+//});
+
+
 // Настройка Kestrel для HTTP/2 для gRPC
 builder.WebHost.ConfigureKestrel(options =>
 {
@@ -76,6 +166,10 @@ app.UseGrpcWeb();
 
 app.UseCors();
 
+app.UseAuthentication();
+
+app.UseAuthorization();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapGrpcService<GRPPostsController>();
@@ -83,7 +177,7 @@ app.UseEndpoints(endpoints =>
 
 //app.UseHttpsRedirection();
 
-app.UseAuthorization();
+
 
 app.MapControllers();
 

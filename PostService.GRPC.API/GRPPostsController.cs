@@ -1,4 +1,5 @@
 ﻿using Grpc.Core;
+using Microsoft.AspNetCore.Authorization;
 using PostService.API.GRPC.Protos;
 using PostService.Core.Abstractions;
 using static PostService.API.GRPC.Protos.GRPCPostsController;
@@ -13,6 +14,8 @@ namespace PostService.API.GRPC
         {
             this._msgService = msgService;
         }
+
+        [Authorize(Roles = "postservice-rw-role")]
         public override async Task<GRPCPostResponse> GetPosts(GRPCPostRequest request, ServerCallContext context)
         {
             if (!Guid.TryParse(request.ThreadID, out var threadId))
