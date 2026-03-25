@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="PostService.Application/PostService.Application.csproj" />
+  <Project Path="PostService.Core/PostService.Core.csproj" />
+  <Project Path="PostService.DataAccess/PostService.DataAccess.csproj" />
+  <Project Path="PostService.GRPC.API/PostService.GRPC.Server.csproj" />
+  <Project Path="PostService.RabbitMQ/PostService.RabbitMQ.csproj" />
+  <Project Path="PostService/PostService.API.csproj" />
+</Solution>

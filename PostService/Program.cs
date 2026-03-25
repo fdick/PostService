@@ -1,7 +1,6 @@
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using PostService.API.GRPC;
 using PostService.Application.Services;
@@ -10,7 +9,6 @@ using PostService.DataAccess;
 using PostService.DataAccess.Repositories;
 using PostService.RabbitMQ.Consumers;
 using System.Security.Claims;
-using System.Text;
 using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,10 +49,20 @@ builder.Services.AddScoped<IUserService, UsersService>();
 builder.Services.AddScoped<IThreadService, ThreadsService>();
 builder.Services.AddScoped<IThreadRepository, ThreadRepository>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("all", policy =>
+    {
+        policy.AllowAnyOrigin()  // Разрешить любые источники
+              .AllowAnyMethod()   // Разрешить любые HTTP методы (GET, POST, PUT, DELETE и т.д.)
+              .AllowAnyHeader();   // Разрешить любые заголовки
+    });
+});
 
-var authServerUrl =  "http://localhost:8080";
-var realm =  "main";
-var clientId =  "post-service-client";
+
+var authServerUrl = "http://localhost:8080";
+var realm = "main";
+var clientId = "post-service-client";
 
 var realmUrl = $"{authServerUrl}/realms/{realm}";
 
@@ -127,30 +135,23 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-//builder.Services.AddAuthorization(opt =>
-//{
-//    opt.AddPolicy("GrpcPolicy", policy =>
-//    {
-//        policy.RequireAuthenticatedUser();
-//    });
-//});
-
-
 // Настройка Kestrel для HTTP/2 для gRPC
 builder.WebHost.ConfigureKestrel(options =>
 {
-    options.ListenLocalhost(5001, listenOptions =>
+    options.ListenAnyIP(5001, listenOptions =>
     {
         listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1;
-        listenOptions.UseHttps();
+        //listenOptions.UseHttps();
     });
 
     options.ListenLocalhost(5002, listenOptions =>
     {
         listenOptions.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http2;
-        listenOptions.UseHttps();
+        //listenOptions.UseHttps();
     });
 });
+
+//builder.WebHost.UseUrls("http://*:5001", "http://*:5002");
 
 var app = builder.Build();
 
@@ -160,11 +161,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<PostServiceDbContext>();
+
+    // Это создаст базу данных и таблицы, если их нет
+    //dbContext.Database.EnsureCreated();
+    // Или используйте миграции (рекомендуется)
+    dbContext.Database.Migrate();
+}
+
 app.UseRouting();
 
 app.UseGrpcWeb();
 
-app.UseCors();
+app.UseCors("all");
 
 app.UseAuthentication();
 

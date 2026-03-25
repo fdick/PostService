@@ -17,6 +17,7 @@ namespace PostService.API.Controllers
         }
 
         [HttpGet]
+        [Route("/allposts")]
         public async Task<ActionResult<List<PostsResponse>>> GetPosts()
         {
             var messages = await _messagesService.GetAllPostsAsync();
